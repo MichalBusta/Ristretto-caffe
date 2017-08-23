@@ -405,6 +405,9 @@ message LayerParameter {
   optional ThresholdParameter threshold_param = 128;
   optional TileParameter tile_param = 138;
   optional WindowDataParameter window_data_param = 129;
+  optional TransposeParameter transpose_param = 147;
+  optional ReorgParameter reorg_param = 148;
+  optional RegionParameter region_param = 152;
 }
 
 // Message that stores parameters used to apply transformation
@@ -1410,3 +1413,28 @@ message PReLUParameter {
   // Whether or not slope parameters are shared across channels.
   optional bool channel_shared = 2 [default = false];
 }
+
+message TransposeParameter {
+  // For example, if you want to transpose NxCxHxW into WxNxHxC,
+  // the parameter should be the following:
+  // transpose_param { dim: 3 dim: 0 dim: 2 dim: 1 }
+  // ie, if the i-th dim has value n, then the i-th axis of top is equal to the n-th axis of bottom.
+  repeated int32 dim = 1;
+}
+
+message RegionParameter {
+  optional uint32 classes = 1 [default = 20]; 
+  optional uint32 coords = 2 [default = 4]; 
+  optional uint32 boxes_of_each_grid = 3 [default = 5];
+  optional bool softmax = 4 [default = false];
+  optional float nms_threshold = 5 [default = 0.4];
+  optional float iou_threshold = 6 [default = 0.6];
+  optional bool expand_bias = 7 [default = false];
+  optional float object_scale = 8 [default = 5];
+}
+
+message ReorgParameter {
+    optional uint32 stride = 1;       
+    optional bool reverse = 2 [default = false];        
+}     
+
