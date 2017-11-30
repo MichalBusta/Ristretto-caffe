@@ -508,6 +508,7 @@ BOOST_PYTHON_MODULE(_caffe) {
           &Solver<Dtype>::Solve), SolveOverloads())
     .def("step", &Solver<Dtype>::Step)
     .def("restore", &Solver<Dtype>::Restore)
+		.def("update", &Solver<Dtype>::ApplyUpdate)
     .def("snapshot", &Solver<Dtype>::Snapshot)
     .def("share_weights", &share_weights)
     .add_property("param", bp::make_function(&Solver<Dtype>::param,
