@@ -94,9 +94,11 @@ class Solver {
    */
   virtual inline const char* type() const { return ""; }
 
+  virtual void ApplyUpdate() = 0;
+
  protected:
   // Make and apply the update value for the current iteration.
-  virtual void ApplyUpdate() = 0;
+
   string SnapshotFilename(const string extension);
   string SnapshotToBinaryProto();
   string SnapshotToHDF5();
