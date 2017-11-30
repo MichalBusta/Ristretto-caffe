@@ -17,6 +17,7 @@
 #include "caffe/caffe.hpp"
 #include "caffe/layers/memory_data_layer.hpp"
 #include "caffe/layers/python_layer.hpp"
+#include "caffe/layers/ondisk_data_layer.hpp"
 #include "caffe/sgd_solvers.hpp"
 
 // Temporary solution for numpy < 1.7 versions: old macro, no promises.
@@ -477,6 +478,16 @@ BOOST_PYTHON_MODULE(_caffe) {
     .def("setup", &Layer<Dtype>::LayerSetUp)
     .def("reshape", &Layer<Dtype>::Reshape)
     .add_property("type", bp::make_function(&Layer<Dtype>::type));
+  bp::class_<Layer<Dtype>, shared_ptr<OnDiskDataLayer<Dtype> >,
+      boost::noncopyable>("OnDiskDataLayer", bp::no_init)
+      .add_property("blobs", bp::make_function(&Layer<Dtype>::blobs,
+            bp::return_internal_reference<>()))
+      .def("setup", &Layer<Dtype>::LayerSetUp)
+      .def("reshape", &Layer<Dtype>::Reshape)
+			.def("get_image_file_name", &OnDiskDataLayer<Dtype>::get_image_file_name)
+			.def("get_crop", &OnDiskDataLayer<Dtype>::get_crop)
+			.def("fill_bucket", &OnDiskDataLayer<Dtype>::fill_bucket)
+      .add_property("type", bp::make_function(&Layer<Dtype>::type));
   BP_REGISTER_SHARED_PTR_TO_PYTHON(Layer<Dtype>);
 
   bp::class_<SolverParameter>("SolverParameter", bp::no_init)
