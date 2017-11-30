@@ -74,6 +74,10 @@ class Solver {
   }
   int iter() const { return iter_; }
 
+  void set_iter(int iter){
+  	iter_ = iter;
+  }
+
   // Invoked at specific points during an iteration
   class Callback {
    protected:
