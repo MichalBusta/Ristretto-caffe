@@ -502,6 +502,7 @@ BOOST_PYTHON_MODULE(_caffe) {
     .add_property("test_nets", bp::make_function(&Solver<Dtype>::test_nets,
           bp::return_internal_reference<>()))
     .add_property("iter", &Solver<Dtype>::iter)
+		.def("set_iter", &Solver<Dtype>::set_iter)
     .def("add_callback", &Solver_add_callback<Dtype>)
     .def("add_callback", &Solver_add_nccl)
     .def("solve", static_cast<void (Solver<Dtype>::*)(const char*)>(
