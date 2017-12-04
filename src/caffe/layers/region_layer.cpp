@@ -162,7 +162,7 @@ RegBox get_region_box(Dtype *x, std::vector<float>& biases, std::vector<float>& 
 {
 	RegBox b;
 	b.x = (i + logistic_activate(x[index + 0]) + biasesx[n]) / w;
-	b.y = (j + logistic_activate(x[index + 1] + biasesy[n])) / h;
+	b.y = (j + logistic_activate(x[index + 1]) + biasesy[n]) / h;
 	b.w = exp(x[index + 2]) * biases[2*n]   / norm;
 	b.h = exp(x[index + 3]) * biases[2*n+1] / norm;
 
