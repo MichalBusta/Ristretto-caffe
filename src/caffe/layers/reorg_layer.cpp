@@ -92,8 +92,8 @@ void ReorgLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype> *> &bottom,
 		const vector<Blob<Dtype> *> &top) {
 	const Dtype *bottom_data = bottom[0]->cpu_data();
 	Dtype *top_data = top[0]->mutable_cpu_data();
-	reorg_cpu(bottom_data, width_, height_,
-			channels_, batch_num_, stride_, reverse_, top_data);
+	reorg_cpu(bottom_data, reorged_width_, reorged_height_,
+			reorged_channels_, batch_num_, stride_, reverse_, top_data);
 }
 
 template<typename Dtype>
